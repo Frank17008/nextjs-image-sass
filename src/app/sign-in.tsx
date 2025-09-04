@@ -2,7 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
-import { SessionProvider as NextSessionProvider } from "next-auth/react";
+import {
+  SessionProvider as NextSessionProvider,
+  SessionProviderProps,
+} from "next-auth/react";
 
 export default function SignIn() {
   return (
@@ -16,6 +19,6 @@ export default function SignIn() {
   );
 }
 
-export function SessionProvider(props: any) {
+export function SessionProvider(props: SessionProviderProps) {
   return <NextSessionProvider {...props} />;
 }
