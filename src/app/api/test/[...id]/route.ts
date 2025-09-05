@@ -19,10 +19,9 @@ export async function GET(req: NextRequest) {
     .from(users)
     .where(eq(users.name, username))
     .limit(1);
-  if (!rows.length) {
+  const result = userSelectSchema.safeParse(rows[0]);
+  if (!result.success) {
     return NextResponse.json({ message: "username is not found" });
   }
-  const result = userSelectSchema.parse(rows[0]);
-  console.info(result, "????");
-  return NextResponse.json(result);
+  return NextResponse.json(result.data);
 }
