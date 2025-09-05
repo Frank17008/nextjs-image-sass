@@ -1,7 +1,10 @@
 import { NextResponse, NextRequest } from "next/server";
-import { userSelectSchema } from "@/server/db/validate-schema";
+import {
+  userSelectSchema,
+  authProviderSelectSchema,
+} from "@/server/db/validate-schema";
 import { db } from "@/server/db/db";
-import { users } from "@/server/db/schema";
+import { users, accounts } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
@@ -23,5 +26,12 @@ export async function GET(req: NextRequest) {
   if (!result.success) {
     return NextResponse.json({ message: "username is not found" });
   }
-  return NextResponse.json(result.data);
+  // 查询provider
+  const rows2 = await db
+    .select()
+    .from(accounts)
+    .where(eq(accounts.userId, result.data.id))
+    .limit(1);
+  const result2 = authProviderSelectSchema.safeParse(rows2[0].provider);
+  return NextResponse.json({ ...result.data, provider: result2.data });
 }
