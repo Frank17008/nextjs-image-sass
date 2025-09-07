@@ -1,6 +1,5 @@
 import { users } from "./schema";
 import { createSelectSchema, createInsertSchema } from "drizzle-zod";
-
 import { pgEnum } from "drizzle-orm/pg-core";
 
 const authProvider = pgEnum("authProvider", ["github", "gitlab"]);
