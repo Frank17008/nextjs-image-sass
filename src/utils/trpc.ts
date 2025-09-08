@@ -1,12 +1,5 @@
-import { initTRPC } from "@trpc/server";
-import { createTRPCContext } from "./context";
+import { createTRPCContext } from "@trpc/tanstack-react-query";
+import { AppRouter } from "@/server/trpc/router";
 
-export const t = initTRPC.context<typeof createTRPCContext>().create();
-export const appRouter = t.router({
-  hello: t.procedure.query(({ ctx }) => {
-    console.info("===>>????", ctx.session);
-    return { message: "hello world" };
-  }),
-});
-// export type definition of API
-export type AppRouter = typeof appRouter;
+export const { TRPCProvider, useTRPC, useTRPCClient } =
+  createTRPCContext<AppRouter>();
