@@ -8,14 +8,20 @@ import {
 } from "next-auth/react";
 
 export default function SignIn() {
+  const handleGitHubLogin = () => {
+    signIn("github", { redirectTo: "/dashboard" });
+  };
+
   return (
-    <Button
-      className="mt-5 cursor-pointer"
-      variant="secondary"
-      onClick={() => signIn("github")}
-    >
-      GitHub
-    </Button>
+    <>
+      <Button
+        className="mt-5 cursor-pointer"
+        variant="secondary"
+        onClick={handleGitHubLogin}
+      >
+        GitHub
+      </Button>
+    </>
   );
 }
 
