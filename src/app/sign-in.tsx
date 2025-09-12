@@ -2,10 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
-import {
-  SessionProvider as NextSessionProvider,
-  SessionProviderProps,
-} from "next-auth/react";
 
 export default function SignIn() {
   const handleGitHubLogin = () => {
@@ -23,8 +19,4 @@ export default function SignIn() {
       </Button>
     </>
   );
-}
-
-export function SessionProvider(props: SessionProviderProps) {
-  return <NextSessionProvider {...props} />;
 }

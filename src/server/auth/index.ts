@@ -16,6 +16,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     sessionsTable: sessions,
     verificationTokensTable: verificationTokens,
   }),
+  // basePath: '/api/auth',
+  // callbacks: {
+  //   authorized: async ({ auth, request }) => {
+  //     console.info("authorized", auth);
+  //     if (request.cookies.get("authjs.session-token")) {
+  //       return true;
+  //     }
+  //     return false;
+  //   },
+  // },
   providers: [GitHub],
   trustHost: true,
 });

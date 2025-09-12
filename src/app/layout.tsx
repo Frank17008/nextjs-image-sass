@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { App } from "../utils/trpcClient";
-import {
-  SessionProvider as NextSessionProvider,
-  SessionProviderProps,
-} from "next-auth/react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,14 +28,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>
-          <App>{children}</App>
-        </SessionProvider>
+        <App>{children}</App>
       </body>
     </html>
   );
-}
-
-export function SessionProvider(props: SessionProviderProps) {
-  return <NextSessionProvider {...props} />;
 }
